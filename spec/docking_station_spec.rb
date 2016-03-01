@@ -10,8 +10,10 @@ describe DockingStation do
 	end
 
 	it 'can release a bike' do
-		expect(new_docking_station.release_bike).to eq Bike.new
+		expect(new_docking_station.release_bike.class).to eq Bike
 	end
 
-
+	it 'releases a working bike' do
+		expect(new_docking_station.release_bike.working?).to eq true	
+	end
 end
