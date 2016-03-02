@@ -24,10 +24,10 @@ class DockingStation
 
   def release_bike
     raise TypeError, "No more bikes." if empty?
-    if create_bike.broken == false
+    if bikes[-1].broken == false
       @bikes.pop
     else
-      "BROKEBITCHES"
+      "This bike is broken. I am sorry."
     end
   end
 
