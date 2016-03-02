@@ -2,8 +2,7 @@
 
 
 describe DockingStation do
-  # it {is_expected.to respond_to :release_bike}
-  # it {is_expected.to respond_to(:dock)}
+
   it {is_expected.to respond_to :dock}
   it {is_expected.to respond_to :bike}
 
@@ -18,7 +17,7 @@ describe DockingStation do
   end
 
   it 'dock the bike' do
-  expect(subject.dock.length).to eq 1 # may be issue depdending on how many bikes a station can hold.
+  expect(subject.dock.length).to eq 1 
   end
 
   it 'returns a TypeError when #dock is empty' do
@@ -45,7 +44,6 @@ describe DockingStation do
   end
 
   it "won't release a broken bike" do
-    # subject.create_bike.broken = true
     subject.dock
     subject.bikes[-1].broken = true
     expect(subject.release_bike).to eq "BROKEBITCHES"
