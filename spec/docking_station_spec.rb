@@ -4,7 +4,7 @@
 describe DockingStation do
 
   it {is_expected.to respond_to :dock}
-  it {is_expected.to respond_to :bike}
+  # it {is_expected.to respond_to :bike}
 
   it 'expects instance of bike class' do
     subject = DockingStation.new

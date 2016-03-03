@@ -9,7 +9,7 @@ class Bike
     @broken ?  false : true
   end
 
-  private
+  
    attr_accessor :broken
    
 end
