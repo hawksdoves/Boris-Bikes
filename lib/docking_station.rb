@@ -27,18 +27,18 @@ class DockingStation
     if bikes[-1].broken == false
       @bikes.pop
     else
-      "This bike is broken. I am sorry."
+      "I am sorry, but this bike is broken, so it will not be released."
     end
   end
 
   private
 
   def full?
-    bikes.size == DEFAULT_CAPACITY ? true : false
+    bikes.size == DEFAULT_CAPACITY 
   end
 
   def empty?
-    bikes.size == 0 ? true : false
+    bikes.size == 0 
   end
 end
 

@@ -46,6 +46,6 @@ describe DockingStation do
   it "won't release a broken bike" do
     subject.dock
     subject.bikes[-1].broken = true
-    expect(subject.release_bike).to eq "BROKEBITCHES"
+    expect(subject.release_bike).to eq "I am sorry, but this bike is broken, so it will not be released."
   end
 end
