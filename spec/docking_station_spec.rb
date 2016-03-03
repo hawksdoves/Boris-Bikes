@@ -27,28 +27,35 @@ describe DockingStation do
   end
 
   it 'releases working bike' do
-    bike = double(:bike)
+    bike = double(:bike,broken: false)
     subject.dock(bike)
-    expect(subject.release_bike).to eq bike
+    expect(subject.release_bike).to be bike
   end
 
 
   it { is_expected.to respond_to(:bike) }
 
-  it 'returns docked bikes' do
-    subject.dock(double(:bike))
-    expect(subject.release_bike).to be_a(Bike)
-  end
+  # SAME TEST AS RELEASE WORKING BIKE?
+  #  let(:bike) {double :bike }
+  #it 'returns docked bikes' do
+  #  allow(bike).to receive(:broken).and_return(true)
+  #  subject.dock(bike)
+  #  expect(subject.release_bike).to eq bike
+  #end
 
   it 'allows MOP to report bike broken' do
     station = DockingStation.new
     bike = double(:bike)
+    allow(bike).to receive(:broken).and_return(false)
     station.broken_bike(bike)
-    expect(bike.working?).to eq false
+    expect(bike.broken).to eq true
   end
 
   it 'does not release broken bike' do
-    subject.broken_bike(double(:bike))
+    bike = double(:bike)
+    allow(bike).to receive(:broken).and_return(true)
+    #subject.broken_bike(bike)
+    subject.dock(bike)
     expect {subject.release_bike}.to raise_error 'bikes broken'
   end
 
