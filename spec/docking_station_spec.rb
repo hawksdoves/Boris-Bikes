@@ -15,9 +15,10 @@ describe DockingStation do
     end
   end
 
-it 'it changes capacity' do
-    expect(DockingStation.new(40)).to eq DockingStation
-end
+  it 'it changes capacity' do
+    station = DockingStation.new(40)
+    expect(station.capacity).to eq 40
+  end
 
   it 'docks bike' do
     bike = Bike.new
@@ -35,8 +36,27 @@ end
   it { is_expected.to respond_to(:bike) }
 
   it 'returns docked bikes' do
-    bike = Bike.new
-    subject.dock(bike)
-    expect(subject.bike).to eq bike
+    subject.dock(Bike.new)
+    expect(subject.release_bike).to be_a(Bike)
   end
+
+  it 'allows MOP to report bike broken' do
+    station = DockingStation.new
+    bike = Bike.new
+    station.broken_bike(bike)
+    expect(bike.working?).to eq false
+  end
+
+  it 'does not release broken bike' do
+    subject.broken_bike(Bike.new)
+    expect {subject.release_bike}.to raise_error 'bikes broken'
+  end
+
+    it 'fails if no bikes' do
+      expect { while true
+         subject.release_bike
+       end }.to raise_error "no bikes available"
+    end
+
+
 end
