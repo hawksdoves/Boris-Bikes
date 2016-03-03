@@ -25,8 +25,13 @@ class DockingStation
   end
 
   def broken_bike(bike)
-    bike.broken = true
+    bike.report_broken
     dock(bike)
+  end
+
+  def remove_for_repair
+    repair_array = []
+    repair_array = @bikes.select{ |bike| bike.broken }
   end
 
   private

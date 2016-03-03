@@ -11,5 +11,8 @@ class Bike
     true
   end
 
+  def report_broken
+    @broken = true
+  end
 
 end
