@@ -1,5 +1,5 @@
 class Bike
-  attr_accessor :broken
+ 
 
   def initialize
      @broken = false
@@ -8,4 +8,8 @@ class Bike
   def working?
     @broken ?  false : true
   end
+
+  private
+   attr_accessor :broken
+   
 end

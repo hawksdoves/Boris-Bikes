@@ -2,7 +2,7 @@ require_relative 'bike'
 
 class DockingStation
   attr_reader :bikes
-  attr_accessor :bike, :capacity
+  attr_accessor :capacity
   DEFAULT_CAPACITY = 20
 
 
