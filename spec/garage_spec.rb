@@ -2,8 +2,10 @@ require 'garage'
 
 describe Garage do
 
+let(:bike) {Bike.new}
+let(:garage) {Garage.new}
+
   it 'calls fix bike method' do
-    bike = Bike.new
     bike.report_broken
     subject.storage << bike
     subject.fixed
@@ -11,8 +13,6 @@ describe Garage do
   end
 
   it 'can store bikes' do
-    bike = Bike.new
-    garage = Garage.new
     garage.storage << bike
     expect(garage.storage.length).to eq 1
   end

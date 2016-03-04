@@ -13,39 +13,36 @@ DEFAULT_CAPACITY = 10
   def loading(from)
     if from.class == Garage
 
-      please_work = from.storage
-      help(please_work)
-      # from.storage.each do |bike| 
-      # fail 'This van is now full' if from.storage.length == capacity 
-      #   if bike.working? 
-      #     van_storage << bike  
-      #     from.storage.delete(bike) 
-      #   end      
-      # end
-      
+      the_holding = from.storage
+      storing_bikes(the_holding, true)
+
     else
-      from.bikes.each {|bike| van_storage << bike if bike.working? == false }
-      from.bikes.delete {|bike| bike.working? == false}
+      the_holding = from.bikes
+      storing_bikes(the_holding, false)
+
     end
   end
 
 
   def unload(to)
-    van_storage.each {|bike| to << bike }
-    van_storage.clear
-  end
-
-private
-# please_work = from.storage
-  def help(please_work)
-    please_work.each do |bike| 
-    fail 'This van is now full' if please_work.length == capacity 
-        if bike.working? 
-          van_storage << bike  
-          please_work.delete(bike) 
-        end  
+    if to.class == Garage
+      van_storage.each {|bike| to.storage << bike }
+      van_storage.clear
+    else
+      van_storage.each { |bike| to.dock(bike) }
     end
   end
 
+private
+
+  def storing_bikes(the_holding, state)
+    the_holding.each do |bike| 
+    fail 'This van is now full' if van_storage.length == capacity   
+        if bike.working? == state
+           van_storage << bike  
+        end  
+    end
+    the_holding.delete_if {|bike| bike.working? == state }
+  end
 
 end
