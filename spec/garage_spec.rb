@@ -17,4 +17,5 @@ describe Garage do
     expect(garage.storage.length).to eq 1
   end
 
+
 end

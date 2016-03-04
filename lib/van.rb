@@ -9,8 +9,22 @@ attr_reader :van_storage
     @van_storage = []
   end
 
+
+
   def loading(from)
-    from.each { |bike| van_storage << bike }
-    from.clear
+    if from.class == Garage
+      from.storage.each { |bike| van_storage << bike if bike.working? }
+      from.storage.clear
+    else
+      from.bikes.each {|bike| van_storage << bike if bike.working? == false }
+      from.bikes.delete {|bike| bike.working? == false}
+    end
   end
+
+
+  def unload(to)
+    van_storage.each {|bike| to << bike }
+    van_storage.clear
+  end
+
 end
