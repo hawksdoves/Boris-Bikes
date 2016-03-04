@@ -6,7 +6,10 @@ class Bike
 
   def working?
     @works
-    
+  end
+
+  def fix_bike
+    @works = true
   end
 
   def report_broken

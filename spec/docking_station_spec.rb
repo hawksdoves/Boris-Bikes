@@ -23,8 +23,8 @@ describe DockingStation do
   end
 
   it 'docks bike' do
-    subject.dock(bike)
-    expect(subject.bikes[0]).to eq bike
+    station.dock(bike)
+    expect(station.bikes[0]).to eq bike
   end
 
   it 'releases working bike' do
@@ -52,7 +52,7 @@ describe DockingStation do
      end }.to raise_error "no bikes available"
   end
 
-  it "only releases working bikes" do 
+  it "only releases working bikes" do
     allow(bike).to receive(:report_broken).and_return(false)
     allow(bike).to receive(:working?).and_return(true)
     3.times {station.dock(bike)}
@@ -61,7 +61,7 @@ describe DockingStation do
     allow(bike).to receive(:working?).and_return(true)
     expect(station.release_bike.working?).to eq bike.working? == true
   end
-  
+
   describe '#remove_for_repair' do
     # before (:each)
     #   @station = DockingStation.new
