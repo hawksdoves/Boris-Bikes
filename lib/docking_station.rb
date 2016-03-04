@@ -9,14 +9,15 @@ class DockingStation
     @capacity = capacity
   end
 
-  attr_reader :bike, :bikes, :capacity
-  attr_writer :bike
+  attr_reader :bikes, :capacity
 
 
   def release_bike
     fail 'no bikes available' if empty?
-    fail 'bikes broken' if @bikes.last.broken
-    @bikes.pop
+    working_bikes = bikes.select {|bike| bike.working? == true}    
+    fail 'no working bikes available' if working_bikes.empty?    
+    released_bike = working_bikes.pop
+    bikes.delete(released_bike)
   end
 
   def dock(bike)
@@ -25,7 +26,7 @@ class DockingStation
   end
 
   def broken_bike(bike)
-    bike.report_broken
+    bike.report_broken 
     dock(bike)
   end
 
